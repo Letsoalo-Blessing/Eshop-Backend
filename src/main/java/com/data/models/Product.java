@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  *
@@ -28,19 +31,33 @@ public class Product {
 	private double price;
 	private String pictureUrl;
 	
+	@JsonBackReference(value = "category")
+	@ManyToOne
+	private Category category;
 	
 	public Product() {
 		super();
 	}
 
 
-	public Product(Long id, String name, String description, double price, String pictureUrl) {
+	public Product(Long id, String name, String description, double price, String pictureUrl,Category category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.pictureUrl = pictureUrl;
+		this.category = category;
+	}
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 

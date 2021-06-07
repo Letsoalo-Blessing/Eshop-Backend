@@ -8,12 +8,14 @@ package com.data.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.data.models.Category;
-import com.data.repository.CategoryRepository;
+import com.data.services.CategoryService;
 
 /**
  *
@@ -23,14 +25,28 @@ import com.data.repository.CategoryRepository;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {
-	
+
 	@Autowired
-	private CategoryRepository categoryRepository;
-	
+	private CategoryService categoryservice;
+
 	@GetMapping("/getAllCategory")
-	public List<Category> getAllCategory(){
-		
-		return categoryRepository.findAll();
+	public List<Category> getAllCategory() {
+
+		return categoryservice.findAllCategories();
 	}
 
+	@GetMapping("/findCategoryById/{id}")
+	Category findCategoryById(@PathVariable long id) {
+		return categoryservice.findCategoryById(id);
+	}
+
+	@DeleteMapping("/deleteCategory/{}")
+	void deletCategory(@PathVariable long id) {
+		categoryservice.deleteCategory(id);
+	}
+	
+	@GetMapping("/findCategoriesForUser/{id}")
+	List<Category> findCategoriesForUser(@PathVariable long id) {
+		return categoryservice.findCategoriesForUser(id);
+	}
 }

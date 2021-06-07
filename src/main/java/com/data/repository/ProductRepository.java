@@ -7,15 +7,17 @@ package com.data.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.data.models.Product;
 /**
  *
  * @author Blessing
  */
-@Repository
+
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-	List<Product> findAll();
+	 @Query("SELECT p FROM Product p WHERE p.name LIKE :n")
+	    List<Product> findByName(@Param("n") String name);
 }
