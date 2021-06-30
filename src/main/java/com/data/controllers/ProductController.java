@@ -45,19 +45,19 @@ public class ProductController {
 		return productservice.findProductById(id);
 	}
 	
-	@GetMapping("/findByName/{name}")
+	@GetMapping("findByName/{name}")
 	List<Product> findByName(@PathVariable String name){
 		
 		return productRepository.findByName("%"+name+"%");
 	}
 	
-	@PostMapping("/addProductToCategory/{idCategory}")
+	@PostMapping("addProductToCategory/{idCategory}")
 	Product addProductToCategory (@RequestBody Product product, @PathVariable long idCategory) {
 		
 		return productservice.addProductToCategory(product, idCategory);
 	}
 	
-	@PutMapping("/editProduct/{id}")
+	@PutMapping("editProduct/{id}")
 	Product editProduct(@RequestBody Product product, @PathVariable long id) {
 		
 		return productservice.editProduct(product, id);

@@ -34,6 +34,7 @@ public class Category {
 	private Long id;
 	
 	private String name;
+	private String pictureUrl;
 
 	@JsonBackReference(value = "user")
 	 @ManyToOne
@@ -48,17 +49,19 @@ public class Category {
 		super();
 	}
 
-	public Category(String name, User user, List<Product> products) {
+	public Category(String name,String pictureUrl, User user, List<Product> products) {
 		super();
 		this.name = name;
+		this.pictureUrl=pictureUrl;
 		this.user = user;
 		this.products = products;
 	}
 
-	public Category(Long id, String name, User user, List<Product> products) {
+	public Category(Long id, String name,String pictureUrl, User user, List<Product> products) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.pictureUrl=pictureUrl;
 		this.user = user;
 		this.products = products;
 	}
@@ -96,6 +99,14 @@ public class Category {
 		this.name = name;
 	}
 	
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
 	public void addProductToCategory(Product product) {
 		if (getProducts()==null) {
 			this.products = new ArrayList<>();
